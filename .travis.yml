@@ -18,3 +18,6 @@ notifications:
       -v.lashchenko.1976@gmail.com
     on_success: never # default: change
     on_failure: always # defa,ult: always
+env:
+  global:
+    - CODECOV_TOKEN="e4b2cce2-9ff1-423c-bd23-ddad61642f6b"
