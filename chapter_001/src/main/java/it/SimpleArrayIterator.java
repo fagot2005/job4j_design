@@ -4,9 +4,9 @@ import java.util.Iterator;
 
 public class SimpleArrayIterator<T> implements Iterator<T> {
     private int index = 0;
-    private T[] values;
+    private Object[] values;
 
-    public SimpleArrayIterator(T[] values) {
+    public SimpleArrayIterator(Object[] values) {
         this.values = values;
     }
 
@@ -18,6 +18,6 @@ public class SimpleArrayIterator<T> implements Iterator<T> {
 
     @Override
     public T next() {
-        return values[index++];
+        return (T) values[index++];
     }
 }
