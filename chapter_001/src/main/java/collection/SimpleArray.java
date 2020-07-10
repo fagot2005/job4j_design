@@ -1,43 +1,31 @@
 package collection;
 
-import it.SimplArray;
-
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class SimpleArray<T> implements Iterable<T> {
 
-    private int countElement;
-    private int possitions;
-    private T[] array;
-    private T[] tempArray;
+    private int modCaunt;
+    private int possitions = 0;
+    private Object[] container = new Object[10];
 
-    public SimpleArray() {
-        this.countElement = 10;
-        this.array = (T[]) new Object[countElement];
-    }
-
-    public T get(int index) {
-        return array[index];
+        public T get(int index) {
+            Objects.checkIndex(index, possitions);
+        return (T) container[index];
     }
 
     public void add(T model) {
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == null) {
-                array[i] = model;
-                break;
+            if (possitions == container.length) {
+                container = Arrays.copyOf(container, 2 * possitions);
             }
-            if (i == array.length - 1) {
-                this.tempArray = (T[]) new Object[array.length];
-                System.arraycopy(array, 0, tempArray, 0, array.length);
-                this.array = (T[]) new Object[array.length + 10];
-                System.arraycopy(tempArray, 0, array, 0, tempArray.length);
-            }
-        }
+            container[possitions++] = model;
+            modCaunt++;
     }
 
     @Override
     public Iterator<T> iterator() {
-        return array[possitions++];
+        return new SimpleArrayIterator<>(container);
     }
 
     public static void main(String[] args) {
