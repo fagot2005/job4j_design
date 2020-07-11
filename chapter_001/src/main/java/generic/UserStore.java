@@ -7,24 +7,20 @@ public class UserStore implements Store<User> {
     @Override
     public void add(User model) {
         store.add(model);
-   }
+    }
 
     @Override
     public boolean replace(String id, User model) {
-        return false;
+        return store.replace(id, model);
     }
 
     @Override
     public boolean delete(String id) {
-
-        return false;
+        return store.delete(id);
     }
 
     @Override
     public User findById(String id) {
-        for (int i = 0; i < store.; i++) {
-
-        }
-        return null;
+        return store.findById(id);
     }
 }
