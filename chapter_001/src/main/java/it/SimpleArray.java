@@ -2,13 +2,14 @@ package it;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class SimpleArray<T> implements SimplArray<T> {
     private Object[] data;
     private int possitions = 0;
 
-    public SimpleArray() {
-        this.data = new Object[2];
+    public SimpleArray(int size) {
+        this.data = new Object[size];
     }
 
     @Override
@@ -26,20 +27,19 @@ public class SimpleArray<T> implements SimplArray<T> {
     }
 
     @Override
-    public T set(int index, T model) {
+    public void T set (int index, T model) {
+        Objects.checkIndex(index, possitions);
         data[index] = model;
-        return null;
     }
 
     @Override
-    public void remove(int index) {
-        for (int i = index; i < data.length; i++) {
-            if (i + 1 == data.length) {
-                data[data.length - 1] = null;
-            } else {
-                data[i] = data[i + 1];
-            }
-        }
+    public T remove(int index) {
+        Objects.checkIndex(index, possitions);
+        T value  = (T) data[index];
+        System.arraycopy(data, index + 1, data, index, data.length - index - 1);
+        data[data.length - 1] = null;
+        possitions--;
+        return value;
     }
 
     @Override
@@ -49,11 +49,26 @@ public class SimpleArray<T> implements SimplArray<T> {
 
     @Override
     public Iterator<T> iterator() {
+        class SimpleArrayIterator<T> implements Iterator<T> {
+            private int index = 0;
+            private Object[] values;
+            public SimpleArrayIterator(Object[] values) {
+                this.values = values;
+            }
+            @Override
+            public boolean hasNext() {
+                return index < values.length;
+            }
+            @Override
+            public T next() {
+                return (T) values[index++];
+            }
+        }
         return new SimpleArrayIterator<T>(data);
     }
 
     public static void main(String[] args) {
-        SimpleArray<String> strings = new SimpleArray<>();
+        SimpleArray<String> strings = new SimpleArray<>(2);
         strings.add("BMW");
         strings.add("AUDY");
         strings.add("MERCEDESS");
