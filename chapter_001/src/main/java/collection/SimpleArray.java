@@ -1,31 +1,49 @@
 package collection;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
 public class SimpleArray<T> implements Iterable<T> {
 
     private int modCaunt;
     private int possitions = 0;
-    private Object[] container = new Object[10];
+    private Object[] container = new Object[1];
 
-        public T get(int index) {
-            Objects.checkIndex(index, possitions);
+    public T get(int index) {
+        Objects.checkIndex(index, possitions);
         return (T) container[index];
     }
 
     public void add(T model) {
-            if (possitions == container.length) {
-                container = Arrays.copyOf(container, 2 * possitions);
-            }
-            container[possitions++] = model;
-            modCaunt++;
+        if (possitions == container.length) {
+            container = Arrays.copyOf(container, 2 * possitions);
+        }
+        container[possitions++] = model;
+        modCaunt++;
     }
 
     @Override
     public Iterator<T> iterator() {
-        return new SimpleArrayIterator<>(container);
+        return new Iterator<>() {
+
+            private int index;
+            private final int expectedModCount = modCaunt;
+
+            @Override
+            public boolean hasNext() {
+                if (expectedModCount != modCaunt) {
+                    throw new ConcurrentModificationException();
+                }
+                return index < possitions;
+            }
+
+            @Override
+            public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return (T) container[index++];
+            }
+        };
     }
 
     public static void main(String[] args) {
