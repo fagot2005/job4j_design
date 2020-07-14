@@ -3,84 +3,62 @@ package linkedlist;
 import java.util.*;
 
 public class NewLinkedList<E> implements Iterable<E> {
-    private Node head;
+    private Node<E> head;
     private int size;
-
+    private int modCount;
 
     private static class Node<E> {
-
-        private int valueNode;
-        private Node next;
-        public Node(int valueNode) {
-            this.valueNode = valueNode;
+        E value;
+        Node next;
+        Node(E value) {
+            this.value = value;
         }
-
-        public int getValueNode() {
-            return valueNode;
-        }
-
-        public void setValueNode(int valueNode) {
-            this.valueNode = valueNode;
-        }
-
-        public Node getNext() {
-            return next;
-        }
-
-        public void setNext(Node next) {
+        Node(E value, Node next) {
+            this.value = value;
             this.next = next;
         }
-
     }
 
-    public void add(int  value) {
+    public void add(E value) {
         if (head == null) {
-            this.head = new Node(value);
-        } else {
-            Node temp = head;
-            while (temp.getNext() != null) {
-                temp = temp.getNext();
-            }
-            temp.setNext(new Node(value));
+            head = new Node(value);
+            size++;
+            modCount++;
+            return;
         }
+        Node tail = head;
+        while (tail.next != null) {
+            tail = tail.next;
+        }
+        tail.next = new Node(value, null);
         size++;
+        modCount++;
     }
 
-    public int get(int index) {
-        //Objects.checkIndex(index, );
-        int carentIndex = 0;
-        Node temp = head;
-        while (temp != null) {
-            if (carentIndex == index) {
-                return temp.getValueNode();
-            } else {
-                temp = temp.getNext();
-                carentIndex++;
-            }
+    public E get(int index) {
+        Objects.checkIndex(index, size);
+        int position = 0;
+        Node current = head;
+        while (position != index) {
+            current = current.next;
+            position++;
         }
-        throw new IllegalArgumentException();
-    }
-
-    public String toString() {
-        Node temp = head;
-        int[] listElement = new int[size];
-        for (int i = 0; i < size; i++) {
-            listElement[i] = temp.getValueNode();
-            temp = temp.getNext();
-        }
-        return Arrays.toString(listElement);
+        return (E) current.value;
     }
 
     @Override
     public Iterator<E> iterator() {
         return new Iterator<>() {
 
+            private Node current = head;
+
             private int index;
-            private final int expectedModCount = size;
+
+            private int expectedModCount = modCount;
 
             @Override
             public boolean hasNext() {
-                if (expectedModCount != size) {
+                if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
                 return index < size;
@@ -91,10 +69,14 @@ public class NewLinkedList<E> implements Iterable<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return (E) index++;
+                E value = (E) current.value;
+                current = current.next;
+                index++;
+                return value;
             }
         };
     }
+
 
     public static void main(String[] args) {
         NewLinkedList element = new NewLinkedList();
@@ -103,9 +85,11 @@ public class NewLinkedList<E> implements Iterable<E> {
         element.add(14);
         element.add(15);
         element.add(16);
-        System.out.println(element);
+        for (int i = 0; i < element.size; i++) {
+            System.out.println(element.get(i));
+        }
+        System.out.println("");
         System.out.println(element.get(2));
         System.out.println(element.get(8));
-
     }
 }
