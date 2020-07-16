@@ -30,9 +30,9 @@ public class SimpleArray<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                if (expectedModCount != modCaunt) {
-                    throw new ConcurrentModificationException();
-                }
+//                if (expectedModCount != modCaunt) {
+//                    throw new ConcurrentModificationException();
+//                }
                 return index < possitions;
             }
 
