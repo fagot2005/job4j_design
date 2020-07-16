@@ -3,32 +3,24 @@ package set;
 import collection.SimpleArray;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 public class SimpleSet<E> implements Iterable<E> {
-    public int size;
     SimpleArray<E> set = new SimpleArray<>();
 
     public void add(E value) {
-        if (equalsElement(value)) {
+        if (!equalsElement(value)) {
             set.add(value);
-            size++;
         }
     }
 
     public boolean equalsElement(E element) {
         boolean res = false;
-        int equalsElement = 0;
-        if (size == 0) {
-            res = true;
-        } else {
-            for (E el : set
-            ) {
-                if (el.equals(element)) {
-                    equalsElement++;
-                }
-            }
-            if (equalsElement == 0) {
+        for (E el : set
+        ) {
+            if (Objects.equals(el, element)) {
                 res = true;
+                break;
             }
         }
         return res;
