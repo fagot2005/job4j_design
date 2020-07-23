@@ -4,25 +4,18 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class LogFilter {
     public static List<String> filter(String file) {
-        List<String> resaltList = null;
+        List<String> lines = null;
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-            List<String> lines = new ArrayList<String>();
-            resaltList = new ArrayList<String>();
-            in.lines().forEach(lines::add);
-            for (String line : lines
-            ) {
-                String[] resalt = line.split(" ");
-                if (resalt[resalt.length - 2].equals("404")) {
-                    resaltList.add(line);
-                }
-            }
+            lines = new ArrayList<String>();
+            in.lines().filter(x -> x.contains("404")).forEach(lines::add);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return resaltList;
+        return lines;
     }
 
     public static void main(String[] args) {
