@@ -29,7 +29,7 @@ public class LogFilter {
         try (PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream(file)))) {
             for (String str:log
             ) {
-                out.write(str + "\r\n");
+                out.write(str + System.lineSeparator());
             }
         } catch (Exception e) {
             e.printStackTrace();
