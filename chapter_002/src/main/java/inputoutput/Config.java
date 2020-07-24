@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.stream.Stream;
 
 public class Config {
     private final String patch;
@@ -22,7 +23,7 @@ public class Config {
     public void load() {
         try (BufferedReader load = new BufferedReader(new FileReader(patch))) {
             load.lines()
-                    .filter(x -> x.contains("="))
+                    .filter(x -> x.contains("=") && (!x.startsWith("#")))
                     .forEach(x -> {
                         String[] res = x.split("=");
                         values.put(res[0], res[1]);
