@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Analizy {
     public void unavailable(String sourse, String target) {
@@ -11,8 +13,8 @@ public class Analizy {
         boolean serverWork = true;
         String timeOf = "";
         String timeOn = "";
-        try (BufferedReader input = new BufferedReader(new FileReader(sourse));
-             BufferedWriter output = new BufferedWriter(new FileWriter(target))) {
+        List<String> parsingResalt = new ArrayList<>();
+        try (BufferedReader input = new BufferedReader(new FileReader(sourse))) {
             do {
                 stringStream = input.readLine();
                 if (stringStream == null) {
@@ -28,19 +30,32 @@ public class Analizy {
                         serverWork = true;
                         timeOn = str[1];
                         if (!timeOf.equals("") && !timeOn.equals("")) {
-                            output.write(timeOf + ", " + timeOn + System.lineSeparator());
-                            //System.out.println(timeOf + ", " + timeOn + System.lineSeparator());
+                            parsingResalt.add(timeOf);
+                            parsingResalt.add(timeOn);
                             timeOf = "";
                             timeOn = "";
                         }
                     }
-                    //System.out.println(stringStream);
                 }
             } while (stringStream != null);
+            writer(parsingResalt, target);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //System.out.println(str);
+    }
+
+    public void writer(List<String> parsing, String target) {
+        try (BufferedWriter output = new BufferedWriter(new FileWriter(target))) {
+            for (int i = 0; i < parsing.size(); i++) {
+                if (i % 2 != 0) {
+                    output.write(parsing.get(i) + System.lineSeparator());
+                } else {
+                    output.write(parsing.get(i) + ", ");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
