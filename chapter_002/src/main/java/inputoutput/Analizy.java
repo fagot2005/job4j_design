@@ -30,8 +30,7 @@ public class Analizy {
                         serverWork = true;
                         timeOn = str[1];
                         if (!timeOf.equals("") && !timeOn.equals("")) {
-                            parsingResalt.add(timeOf);
-                            parsingResalt.add(timeOn);
+                            parsingResalt.add(timeOf + ", " + timeOn);
                             timeOf = "";
                             timeOn = "";
                         }
@@ -47,11 +46,7 @@ public class Analizy {
     public void writer(List<String> parsing, String target) {
         try (BufferedWriter output = new BufferedWriter(new FileWriter(target))) {
             for (int i = 0; i < parsing.size(); i++) {
-                if (i % 2 != 0) {
-                    output.write(parsing.get(i) + System.lineSeparator());
-                } else {
-                    output.write(parsing.get(i) + ", ");
-                }
+                output.write(parsing.get(i) + System.lineSeparator());
             }
         } catch (Exception e) {
             e.printStackTrace();
