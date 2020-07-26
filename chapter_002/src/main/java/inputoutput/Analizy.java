@@ -1,14 +1,11 @@
 package inputoutput;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Analizy {
-    public void unavailable(String sourse, String target) {
+    public void unavailable(String sourse, File target) {
         String stringStream;
         boolean serverWork = true;
         String timeOf = "";
@@ -43,7 +40,7 @@ public class Analizy {
         }
     }
 
-    public void writer(List<String> parsing, String target) {
+    public void writer(List<String> parsing, File target) {
         try (BufferedWriter output = new BufferedWriter(new FileWriter(target))) {
             for (int i = 0; i < parsing.size(); i++) {
                 output.write(parsing.get(i) + System.lineSeparator());
@@ -54,7 +51,7 @@ public class Analizy {
     }
 
     public static void main(String[] args) {
-        Analizy analizy = new Analizy();
-        analizy.unavailable("chapter_002/data/sourseAnalize.txt", "chapter_002/data/targetAnalize.txt");
+        //Analizy analizy = new Analizy();
+        //analizy.unavailable("chapter_002/data/sourseAnalize.txt", "chapter_002/data/targetAnalize.txt");
     }
 }
