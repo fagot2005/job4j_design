@@ -1,46 +1,55 @@
 package collection;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.IntStream;
+import java.util.Map;
 
 public class AnalizeCollection {
 
-    public Info diff(List<UserColl> previous, List<UserColl> current) {
-        List<Integer> add = new ArrayList<>();
+    public int[] diff(List<UserColl> previous, List<UserColl> current) {
+        int[] info = new int[3];
         List<Integer> cheng = new ArrayList<>();
-        List<Integer> dellete = new ArrayList<>();
-        List<Integer> idPrevious = new ArrayList<>();
-        List<Integer> idCurrent = new ArrayList<>();
+        List<Integer> tempAdd = new ArrayList<>();
+        List<Integer> tempDell = new ArrayList<>();
+        Map<Integer, UserColl> previousMap = new HashMap<>();
+        Map<Integer, UserColl> currentMap = new HashMap<>();
         for (int i = 0; i < previous.size(); i++) {
-            idPrevious.add(previous.get(i).id);
+            previousMap.put(previous.get(i).id, previous.get(i));
         }
         for (int i = 0; i < current.size(); i++) {
-            idCurrent.add(current.get(i).id);
+            currentMap.put(current.get(i).id, current.get(i));
         }
-        for (int i = 0; i < idCurrent.size(); i++) {
-            //  for (int j = 0; j < idCurrent.size(); j++) {
-            if (!idPrevious.contains(idCurrent.get(i))) {
-                System.out.println("ADD" + idCurrent.get(i));
-                add.add(current.get(i).id);
-            } else {
-                if (!previous.get(i).name.equals(current.get(i).name)) {
-                    System.out.println("CHENG" + previous.get(i).id + previous.get(i).name);
-                    cheng.add(previous.get(i).id);
+        for (Integer prevMap : previousMap.keySet()) {
+            for (Integer currMap : currentMap.keySet()) {
+                if (previousMap.get(prevMap).id == currentMap.get(currMap).id) {
+                    if (!previousMap.get(prevMap).name.equals(currentMap.get(currMap).name)) {
+                        cheng.add(prevMap);
+                        tempAdd.add(currMap);
+                    } else {
+                        tempAdd.add(currMap);
+                    }
                 }
             }
         }
-        for (int i = 0; i < idPrevious.size(); i++) {
-            //  for (int j = 0; j < idCurrent.size(); j++) {
-            if (!idCurrent.contains(idPrevious.get(i))) {
-                System.out.println("DELLETE" + idPrevious.get(i));
-                dellete.add(previous.get(i).id);
+        for (Integer currMap : currentMap.keySet()) {
+            for (Integer prevMap : previousMap.keySet()) {
+                if (currentMap.get(currMap).id == previousMap.get(prevMap).id) {
+                    tempDell.add(prevMap);
+                }
             }
         }
-        Info resalt = new Info(add.size(), cheng.size(), dellete.size());
-        return resalt;
+        for (int i = 0; i < tempAdd.size(); i++) {
+            currentMap.remove(tempAdd.get(i));
+        }
+        for (int i = 0; i < tempDell.size(); i++) {
+            previousMap.remove(tempDell.get(i));
+        }
+        info[0] = currentMap.size();
+        info[1] = cheng.size();
+        info[2] = previousMap.size();
+        return info;
     }
-
 
     public static class UserColl {
         int id;
@@ -57,18 +66,6 @@ public class AnalizeCollection {
 
         public String getName() {
             return name;
-        }
-    }
-
-    public static class Info {
-        int added;
-        int chenget;
-        int delleted;
-
-        public Info(int added, int chenget, int delleted) {
-            this.added = added;
-            this.chenget = chenget;
-            this.delleted = delleted;
         }
     }
 }
