@@ -17,16 +17,15 @@ public class EchoServer {
                              new InputStreamReader(socket.getInputStream()))) {
                     String str;
                     boolean isWork = true;
-                    while (isWork) {
-                        if (in.readLine().contains("Bye")) {
-                            isWork = false;
-                            break;
-                        }
-                        while (!(str = in.readLine()).isEmpty()) {
-                            System.out.println(str);
-                        }
-                        out.write("HTTP/1.1 200 OK\r\n\\".getBytes());
+
+                    while (!(str = in.readLine()).isEmpty()) {
+                        System.out.println(str);
                     }
+                    if (in.readLine().contains("Bye")) {
+                        isWork = false;
+                        break;
+                    }
+                    out.write("HTTP/1.1 200 OK\r\n\\".getBytes());
                 }
             }
         }
