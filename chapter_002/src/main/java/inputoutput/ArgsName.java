@@ -11,6 +11,9 @@ public class ArgsName {
     }
 
     private void pars(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("arguments of args[] are null");
+        }
         for (int i = 0; i < args.length; i++) {
             String[] str = args[i].split("=");
             values.put(str[0].substring(1), str[1]);
