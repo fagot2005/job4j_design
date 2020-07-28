@@ -4,7 +4,9 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-public class SimpleArray<T> implements Iterable<T> {   private Object[] data = new Object[200];
+public class SimpleArray<T> implements Iterable<T> {
+
+    private Object[] data = new Object[200];
     private int possitions = 0;
 
     public void add(T model) {
