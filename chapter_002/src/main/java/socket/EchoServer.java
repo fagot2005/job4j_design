@@ -9,21 +9,20 @@ import java.net.Socket;
 
 public class EchoServer {
     public static void main(String[] args) throws IOException {
-        try (ServerSocket server = new ServerSocket(8888)) {
+        try (ServerSocket server = new ServerSocket(9000)) {
+            boolean isWork = true;
             while (true) {
                 Socket socket = server.accept();
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
                     String str;
-                    boolean isWork = true;
-
                     while (!(str = in.readLine()).isEmpty()) {
                         System.out.println(str);
-                    }
-                    if (in.readLine().contains("Bye")) {
-                        isWork = false;
-                        break;
+                        if (in.readLine().contains("Bye")) {
+                            isWork = false;
+                            break;
+                        }
                     }
                     out.write("HTTP/1.1 200 OK\r\n\\".getBytes());
                 }
