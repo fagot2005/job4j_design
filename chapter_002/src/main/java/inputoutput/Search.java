@@ -15,9 +15,9 @@ public class Search {
         search(start, args[1]).forEach(System.out::println);
     }
 
-        public static List<Path> search(Path root, String ext) {
-        SearchFiles seacher = new SearchFiles(p -> p.toFile().getName.endsWith(ext));
+    public static List<Path> search(Path root, String ext) {
+        SearchFiles searcher = new SearchFiles(p -> p.toFile().getName.endsWith(ext));
         Files.walkFileTree(root, searcher);
-        return searcher.getPaths();
+        return searcher.getPaths();;
     }
 }
