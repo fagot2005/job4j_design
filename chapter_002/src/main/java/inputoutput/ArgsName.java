@@ -21,6 +21,9 @@ public class ArgsName {
     }
 
     public static ArgsName of(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("arguments of args[] are null");
+        }
         ArgsName name = new ArgsName();
         name.pars(args);
         return name;
