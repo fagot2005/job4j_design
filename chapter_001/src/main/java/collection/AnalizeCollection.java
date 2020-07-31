@@ -22,10 +22,6 @@ public class AnalizeCollection {
                         info[0]++;
                     }
                 }
-            }
-        }
-        for (UserColl curr : current) {
-            for (Integer prevMap : previousMap.keySet()) {
                 if (curr.id == previousMap.get(prevMap).id) {
                     info[2]++;
                 }
