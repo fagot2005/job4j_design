@@ -12,23 +12,19 @@ public class AnalizeCollection {
         for (int i = 0; i < previous.size(); i++) {
             previousMap.put(previous.get(i).id, previous.get(i));
         }
-        for (Integer prevMap : previousMap.keySet()) {
-            for (UserColl curr : current) {
-                if (curr.id == previousMap.get(prevMap).id) {
-                    if (!previousMap.get(prevMap).name.equals(curr.name)) {
-                        info[1]++;
-                        info[0]++;
-                    } else {
-                        info[0]++;
-                    }
+        for (UserColl curr : current) {
+            if (previousMap.containsKey(curr.id)) {
+                if (!previousMap.get(curr.id).name.equals(curr.name)) {
+                    info[0]++;
+                    info[1]++;
+                } else {
+                    info[0]++;
                 }
-                if (curr.id == previousMap.get(prevMap).id) {
-                    info[2]++;
-                }
+            } else {
+                info[2]++;
             }
         }
         info[0] = current.size() - info[0];
-        info[2] = previousMap.size() - info[2];
         return info;
     }
 
