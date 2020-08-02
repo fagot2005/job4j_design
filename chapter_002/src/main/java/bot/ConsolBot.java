@@ -13,8 +13,8 @@ public class ConsolBot {
     public static void main(String[] args) {
         List<String> phrase = new ArrayList<>();
         List<String> logPhrase = new ArrayList<>();
-        try (BufferedReader in = new BufferedReader(new FileReader(".\\chapter_002\\data\\questions.txt"));
-             PrintWriter log = new PrintWriter(new FileWriter(".\\chapter_002\\data\\logBot.txt"))) {
+        try (BufferedReader in = new BufferedReader(new FileReader("./chapter_002/data/questions.txt"));
+             PrintWriter log = new PrintWriter(new FileWriter("./chapter_002/data/logBot.txt"))) {
             phrase = Arrays.asList(in.readLine().split(","));
             Scanner scanner = new Scanner(System.in);
             String welcom = "Hi, i'm happy Bot, talk with me";
