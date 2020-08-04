@@ -2,21 +2,21 @@ Hi, i'm happy Bot, talk with me
 
 Hi
 
-Hello
+What is your name?
 
-Hello
+Vit
 
-See you later.
+What do you do?
 
-Ok
+By
 
-Good by.
+What do you do?
 
 Stop
 
-O, no
+Ok
 
-Good by.
+Hello
 
 End
 

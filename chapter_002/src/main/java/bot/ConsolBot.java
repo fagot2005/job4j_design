@@ -1,9 +1,6 @@
 package bot;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,10 +8,13 @@ import java.util.Scanner;
 
 public class ConsolBot {
     public static void main(String[] args) {
-        List<String> phrase = new ArrayList<>();
+                bot();
+    }
+
+    private static void bot() {
         List<String> logPhrase = new ArrayList<>();
-        try (BufferedReader in = new BufferedReader(new FileReader("./chapter_002/data/questions.txt"));
-             PrintWriter log = new PrintWriter(new FileWriter("./chapter_002/data/logBot.txt"))) {
+        List<String> phrase = new ArrayList<>();
+        try (BufferedReader in = new BufferedReader(new FileReader("./chapter_002/data/questions.txt"))) {
             phrase = Arrays.asList(in.readLine().split(","));
             Scanner scanner = new Scanner(System.in);
             String welcom = "Hi, i'm happy Bot, talk with me";
@@ -35,10 +35,7 @@ public class ConsolBot {
                     getPrintln(question);
                 }
             }
-            for (String logPrase : logPhrase
-            ) {
-                log.println(logPrase);
-            }
+            write(logPhrase);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,5 +47,14 @@ public class ConsolBot {
 
     private static boolean isAdd(List<String> logPhrase, String answer) {
         return logPhrase.add(answer + System.lineSeparator());
+    }
+
+    private static void write(List<String> logPhrase) throws IOException {
+        try (PrintWriter log = new PrintWriter(new FileWriter("./chapter_002/data/logBot.txt"))) {
+            for (String logPrase : logPhrase
+            ) {
+                log.println(logPrase);
+            }
+        }
     }
 }
