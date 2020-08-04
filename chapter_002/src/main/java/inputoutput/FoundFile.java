@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class FoundFile {
     public static void main(String[] args) throws IOException {
@@ -15,22 +16,8 @@ public class FoundFile {
 
     public static List<Path> foundFiles(ArgFoundFileParam argFoundFileParam) throws IOException {
         List<Path> paths = new ArrayList<>();
-        if (argFoundFileParam.mask().startsWith("m")) {
-            //искать по маске, *.txt
-            SearchFiles searchFiles = new SearchFiles(p -> p.toFile().getName().endsWith(argFoundFileParam.selection().substring(argFoundFileParam.selection().indexOf("."))));
-            fileTree(argFoundFileParam, searchFiles);
-            paths = searchFiles.getPaths();
-        } else if (argFoundFileParam.mask().startsWith("f")) {
-            //имя файла целиком
-            SearchFiles searchFiles = new SearchFiles(p -> p.toFile().getName().startsWith(argFoundFileParam.selection()));
-            fileTree(argFoundFileParam, searchFiles);
-            paths = searchFiles.getPaths();
-        } else if (argFoundFileParam.mask().startsWith("r")) {
-            //регулярное выражение
-            SearchFiles searchFiles = new SearchFiles(p -> p.toFile().getName().startsWith(argFoundFileParam.selection()));
-            fileTree(argFoundFileParam, searchFiles);
-            paths = searchFiles.getPaths();
-        }
+        SearchFiles searchFiles = (SearchFiles) ConditionFactory.newConditions(argFoundFileParam);
+        fileTree(argFoundFileParam,  searchFiles);
         return paths;
     }
 
