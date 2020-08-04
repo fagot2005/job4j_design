@@ -29,8 +29,7 @@ public class ConsolBot {
                     break;
                 } else {
                     isAdd(logPhrase, answer);
-                    int index = (int) (Math.random() * logPhrase.size());
-                    String question = phrase.get(index);
+                    String question = randomQwestion(logPhrase, phrase);
                     isAdd(logPhrase, question);
                     getPrintln(question);
                 }
@@ -39,6 +38,11 @@ public class ConsolBot {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static String randomQwestion(List<String> logPhrase, List<String> phrase) {
+        int index = (int) (Math.random() * logPhrase.size());
+        return phrase.get(index);
     }
 
     private static void getPrintln(String str) {
