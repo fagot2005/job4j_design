@@ -7,37 +7,42 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ConsolBot {
-    public static void main(String[] args) {
-                bot();
+    public static void main(String[] args) throws IOException {
+        bot();
     }
 
-    private static void bot() {
-        List<String> logPhrase = new ArrayList<>();
-        List<String> phrase = new ArrayList<>();
+    public static List<String> reader(List<String> phrase) {
         try (BufferedReader in = new BufferedReader(new FileReader("./chapter_002/data/questions.txt"))) {
             phrase = Arrays.asList(in.readLine().split(","));
-            Scanner scanner = new Scanner(System.in);
-            String welcom = "Hi, i'm happy Bot, talk with me";
-            getPrintln(welcom);
-            isAdd(logPhrase, welcom);
-            for (int i = 0; i < 2;) {
-                String answer = scanner.nextLine();
-                if (answer.equals("Stop")) {
-                    isAdd(logPhrase, answer);
-                } else if (answer.equals("End")) {
-                    isAdd(logPhrase, answer);
-                    break;
-                } else {
-                    isAdd(logPhrase, answer);
-                    String question = randomQwestion(logPhrase, phrase);
-                    isAdd(logPhrase, question);
-                    getPrintln(question);
-                }
-            }
-            write(logPhrase);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return phrase;
+    }
+
+    private static void bot() throws IOException {
+        List<String> phrase = new ArrayList<>();
+        List<String> logPhrase = new ArrayList<>();
+                phrase = reader(phrase); //Arrays.asList(in.readLine().split(","));
+        Scanner scanner = new Scanner(System.in);
+        String welcom = "Hi, i'm happy Bot, talk with me";
+        getPrintln(welcom);
+        isAdd(logPhrase, welcom);
+        for (int i = 0; i < 2;) {
+            String answer = scanner.nextLine();
+            if (answer.equals("Stop")) {
+                isAdd(logPhrase, answer);
+            } else if (answer.equals("End")) {
+                isAdd(logPhrase, answer);
+                break;
+            } else {
+                isAdd(logPhrase, answer);
+                String question = randomQwestion(logPhrase, phrase);
+                isAdd(logPhrase, question);
+                getPrintln(question);
+            }
+        }
+        write(logPhrase);
     }
 
     private static String randomQwestion(List<String> logPhrase, List<String> phrase) {
