@@ -22,9 +22,6 @@ public class ArgFoundFileParam {
         if (!stringArg[2].startsWith("d") || !stringArg[3].startsWith("n") || (!(stringArg[4].startsWith("m") || stringArg[4].startsWith("f") || stringArg[4].startsWith("r"))) || !stringArg[5].startsWith("o")) {
             throw new IllegalArgumentException("Don't correct used key  -d..., -e..., -o..., (-m, -f, -r)..., -o");
         }
-//        if ((!stringArg[3].substring(stringArg[3].indexOf(" ")).trim().startsWith("*") || !stringArg[3].substring(stringArg[3].indexOf(" ")).trim().startsWith(".") || !stringArg[3].substring(stringArg[3].indexOf(" ")).trim().contains("."))) {
-//            throw new IllegalArgumentException("Exclude files name will start with ., f.e. .txt");
-//        }
         File file = new File(directiry());
         if (!file.exists()) {
             throw new IllegalArgumentException("Not correct directory patch");

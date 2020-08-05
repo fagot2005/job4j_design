@@ -3,25 +3,30 @@ package inputoutput;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class FoundFile {
     public static void main(String[] args) throws IOException {
         ArgFoundFileParam argFoundFileParam = new ArgFoundFileParam(args);
         argFoundFileParam.valid();
-        List<Path> files = foundFiles(argFoundFileParam);
+        Predicate<Path> condition = ConditionFactory.newConditions(argFoundFileParam);
+        FoundFile foundFile = new FoundFile();
+        List<Path> files = FoundFile.foundFiles(argFoundFileParam, condition);
+        foundFile.writeLog(argFoundFileParam, files);
     }
 
-    public static List<Path> foundFiles(ArgFoundFileParam argFoundFileParam) throws IOException {
-        List<Path> paths = new ArrayList<>();
-        SearchFiles searchFiles = (SearchFiles) ConditionFactory.newConditions(argFoundFileParam);
-        fileTree(argFoundFileParam,  searchFiles);
-        return paths;
+    private void writeLog(ArgFoundFileParam argFoundFileParam, List<Path> files) throws IOException {
+        Files.write(
+                Path.of(argFoundFileParam.output()),
+                files.stream().map(Path :: toString)
+                        .collect(Collectors.toList()));
     }
 
-    private static void fileTree(ArgFoundFileParam argFoundFileParam, SearchFiles searchFiles) throws IOException {
-        Files.walkFileTree(Path.of(argFoundFileParam.directiry()), searchFiles);
+    public static List<Path> foundFiles(ArgFoundFileParam argFoundFileParam, Predicate<Path> conditions) throws IOException {
+        SearchFiles sf = new SearchFiles(conditions);
+        Files.walkFileTree(Path.of(argFoundFileParam.directiry()), sf);
+        return sf.getPaths();
     }
 }

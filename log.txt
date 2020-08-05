@@ -1,10 +1,58 @@
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:18 +0300] "GET /items/ajax.html HTTP/1.1" 404 1113
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:23 +0300] "GET /TrackStudio HTTP/1.1" 302 -
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:23 +0300] "GET /TrackStudio/ HTTP/1.1" 404 1110
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:34 +0300] "GET /TrackStudioNew/ HTTP/1.1" 404 -
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:48 +0300] "GET / HTTP/1.1" 200 11488
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /tomcat.png HTTP/1.1" 200 5103
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /tomcat.css HTTP/1.1" 200 5931
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /bg-nav.png HTTP/1.1" 200 1401
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /bg-button.png HTTP/1.1" 200 713
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /bg-middle.png HTTP/1.1" 200 1918
+.\chapter_001\src\main\java\collection\AnalizeCollection.java
+.\chapter_001\src\main\java\collection\SimpleArray.java
+.\chapter_001\src\main\java\generic\Base.java
+.\chapter_001\src\main\java\generic\MemStore.java
+.\chapter_001\src\main\java\generic\Role.java
+.\chapter_001\src\main\java\generic\Store.java
+.\chapter_001\src\main\java\generic\User.java
+.\chapter_001\src\main\java\generic\UserStore.java
+.\chapter_001\src\main\java\it\ArrayIt.java
+.\chapter_001\src\main\java\it\BackwardArrayIt.java
+.\chapter_001\src\main\java\it\EvenIterator.java
+.\chapter_001\src\main\java\it\FlatMap.java
+.\chapter_001\src\main\java\it\MatrixIt.java
+.\chapter_001\src\main\java\it\SimpleArray.java
+.\chapter_001\src\main\java\linkedlist\ForwardLinked.java
+.\chapter_001\src\main\java\linkedlist\ForwardLinkedTwo.java
+.\chapter_001\src\main\java\linkedlist\NewLinkedList.java
+.\chapter_001\src\main\java\linkedlist\SimpleQueue.java
+.\chapter_001\src\main\java\linkedlist\SimpleStack.java
+.\chapter_001\src\main\java\map\SimpleMap.java
+.\chapter_001\src\main\java\map\User.java
+.\chapter_001\src\main\java\set\SimpleSet.java
+.\chapter_001\src\main\java\tree\SimpleTree.java
+.\chapter_001\src\main\java\tree\Tree.java
+.\chapter_001\src\test\java\collection\AnalizeCollectionTest.java
+.\chapter_001\src\test\java\collection\SimpleArrayTest.java
+.\chapter_001\src\test\java\it\ArrayItTest.java
+.\chapter_001\src\test\java\it\BackwardArrayItTest.java
+.\chapter_001\src\test\java\it\EvenIteratorTest.java
+.\chapter_001\src\test\java\it\FlatMapTest.java
+.\chapter_001\src\test\java\it\MatrixItTest.java
+.\chapter_001\src\test\java\linkedlist\ForwardLinkedTest.java
+.\chapter_001\src\test\java\linkedlist\ForwardLinkedTwoTest.java
+.\chapter_001\src\test\java\linkedlist\SimpleQueueTest.java
+.\chapter_001\src\test\java\linkedlist\SimpleStackTest.java
+.\chapter_001\src\test\java\tree\SimpleTreeTest.java
+.\chapter_002\src\main\java\bot\ConsolBot.java
+.\chapter_002\src\main\java\inputoutput\Analizy.java
+.\chapter_002\src\main\java\inputoutput\ArgFoundFileParam.java
+.\chapter_002\src\main\java\inputoutput\ArgsName.java
+.\chapter_002\src\main\java\inputoutput\ArgZip.java
+.\chapter_002\src\main\java\inputoutput\ConditionFactory.java
+.\chapter_002\src\main\java\inputoutput\Config.java
+.\chapter_002\src\main\java\inputoutput\Dir.java
+.\chapter_002\src\main\java\inputoutput\FoundFile.java
+.\chapter_002\src\main\java\inputoutput\LogFilter.java
+.\chapter_002\src\main\java\inputoutput\MultiplicationTable.java
+.\chapter_002\src\main\java\inputoutput\PrintFiles.java
+.\chapter_002\src\main\java\inputoutput\ReadFile.java
+.\chapter_002\src\main\java\inputoutput\Search.java
+.\chapter_002\src\main\java\inputoutput\SearchFiles.java
+.\chapter_002\src\main\java\inputoutput\Zip.java
+.\chapter_002\src\main\java\log\UsageLog4j.java
+.\chapter_002\src\main\java\log\UsageLog4jAddVar.java
+.\chapter_002\src\main\java\socket\EchoServer.java
+.\chapter_002\src\test\java\inputoutput\AnalizyTest.java
+.\chapter_002\src\test\java\inputoutput\ArgsNameTest.java
+.\chapter_002\src\test\java\inputoutput\ConfigTest.java
