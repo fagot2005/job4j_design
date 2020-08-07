@@ -1,20 +1,40 @@
 Hi, i'm happy Bot, talk with me
 
-Hi
+hi
 
-What is your name?
+See you later.
 
-Vit
+yes
 
-What do you do?
+See you later.
 
-By
+hello
+
+See you later.
+
+no
+
+Good by.
+
+god
+
+Good by.
+
+ok
+
+Good by.
+
+no
 
 See you later.
 
 Stop
 
-O
+no
+
+What do you do?
+
+hi
 
 Hello
 

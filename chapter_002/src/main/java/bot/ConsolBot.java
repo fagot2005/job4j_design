@@ -21,23 +21,25 @@ public class ConsolBot {
     }
 
     private static void bot() throws IOException {
+        String stop = "Stop";
+        String end = "End";
         List<String> phrase = new ArrayList<>();
         List<String> logPhrase = new ArrayList<>();
-                phrase = reader(phrase); //Arrays.asList(in.readLine().split(","));
+        phrase = reader(phrase); //Arrays.asList(in.readLine().split(","));
         Scanner scanner = new Scanner(System.in);
         String welcom = "Hi, i'm happy Bot, talk with me";
         getPrintln(welcom);
         isAdd(logPhrase, welcom);
-        for (int i = 0; i < 2;) {
+        for (int i = 0; true;) {
             String answer = scanner.nextLine();
-            if (answer.equals("Stop")) {
+            if (answer.equals(stop)) {
                 isAdd(logPhrase, answer);
-            } else if (answer.equals("End")) {
+            } else if (answer.equals(end)) {
                 isAdd(logPhrase, answer);
                 break;
             } else {
                 isAdd(logPhrase, answer);
-                String question = randomQwestion(logPhrase, phrase);
+                String question = randomQwestion(phrase);
                 isAdd(logPhrase, question);
                 getPrintln(question);
             }
@@ -45,8 +47,8 @@ public class ConsolBot {
         write(logPhrase);
     }
 
-    private static String randomQwestion(List<String> logPhrase, List<String> phrase) {
-        int index = (int) (Math.random() * logPhrase.size());
+    private static String randomQwestion(List<String> phrase) {
+        int index = (int) (Math.random() * phrase.size());
         return phrase.get(index);
     }
 
