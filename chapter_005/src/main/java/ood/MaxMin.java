@@ -32,10 +32,13 @@ public class MaxMin {
         list.add(4);
         list.add(6);
         list.add(30);
+        System.out.println("До сортировки " + list);
         max(list, (x, y) -> x.compareTo(y));
-        System.out.println(list);
-        max(list, (x, y) -> y.compareTo(x));
-        System.out.println(list);
+        System.out.println("Поиск max " + list);
+        min(list, (x, y) -> y.compareTo(x));
+        System.out.println("Поиск min " + list);
+        list.sort((x, y) -> x.compareTo(y));
+        System.out.println("После метода sort " + list);
 
     }
 }
