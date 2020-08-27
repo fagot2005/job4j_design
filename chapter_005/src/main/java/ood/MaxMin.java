@@ -25,20 +25,15 @@ public class MaxMin {
     }
 
     public static void main(String[] args) {
-                List<Integer> list = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         list.add(20);
         list.add(35);
         list.add(23);
         list.add(4);
         list.add(6);
         list.add(30);
-        System.out.println("До сортировки " + list);
-        max(list, (x, y) -> x.compareTo(y));
-        System.out.println("Поиск max " + list);
-        min(list, (x, y) -> y.compareTo(x));
-        System.out.println("Поиск min " + list);
-        list.sort((x, y) -> x.compareTo(y));
-        System.out.println("После метода sort " + list);
-
+        System.out.println("Original list " + list);
+        System.out.println("Search max " + max(list, Comparator.naturalOrder()));
+        System.out.println("Search min " + min(list, Comparator.naturalOrder()));
     }
 }
